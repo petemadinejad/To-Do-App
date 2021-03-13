@@ -1,0 +1,74 @@
+{% extends "base_generic.html" %}
+{% load todo_tags %}
+{% block content %}
+     <style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+    text-align: center;
+    background-color: beige;
+}
+th, td {
+  padding: 15px;
+}
+   </style>
+<h1>To Do Application</h1>
+
+  <p>Welcome to <em>To Do Application</em></p>
+    <h2>
+    Latest Tasks
+    </h2>
+        {% if latest_task %}
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Category</th>
+                <th>time left</th>
+            </tr>
+            {% for task in latest_task %}
+                <tr>
+                    <td><a href="{{ task.get_absolute_url }}">{{ task.title|sencase }}</a></td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{% deltadate task.due_date %} days</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No category are available.</p>
+    {% endif %}
+    <h2>
+    Due Tasks
+    </h2>
+    {% if passed_task %}
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Category</th>
+                <th>time left</th>
+            </tr>
+            {% for task in passed_task %}
+                <tr>
+                    <td><a href="{{ task.get_absolute_url }}">{{ task.title|sencase }}</a></td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{% deltadate task.due_date %} days</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No category are available.</p>
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+

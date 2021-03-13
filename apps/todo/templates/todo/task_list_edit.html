@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+{% load todo_tags %}
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            background-color: aliceblue;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    <body>
+    {% if object_list %}
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Category</th>
+                <th>time left</th>
+            </tr>
+            {% for task in object_list %}
+                <tr>
+                    <td><a href="{% url 'taskupdate'  task.id %}">{{ task.title|sencase }}</a></td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{% deltadate task.due_date %} days</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No category are available.</p>
+    {% endif %}
+{% endblock %}

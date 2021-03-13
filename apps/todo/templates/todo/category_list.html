@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            background-color: beige;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    <h1>Full category</h1>
+    {% if full_category %}
+        <table>
+            <tr>
+                <th>name</th>
+            </tr>
+            {% for category in full_category %}
+                <tr>
+                    <td><a href="{% url 'list_task_category' category.id %}">{{ category.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No category are available.</p>
+    {% endif %}
+    <h1>Empty category</h1>
+    {% if empty_category %}
+        <table>
+            <tr>
+                <th>name</th>
+            </tr>
+            {% for category in empty_category %}
+                <tr>
+                    <td><a href="{% url 'list_task_category' category.id %}">{{ category.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No category are available.</p>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+

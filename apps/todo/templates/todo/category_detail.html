@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+{% load todo_tags %}
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            background-color: aliceblue;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    <h1>To Do Application</h1>
+
+    <p>Welcome to <em>To Do Application</em></p>
+    <h2>
+        ALL TASK IN CATEGORY """{{ object }}"""
+    </h2>
+    {% if object %}
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Category</th>
+                <th>time left</th>
+            </tr>
+            {% for obj in object.task_set.all %}
+                <tr>
+                    <td>{{ obj.title|sencase }}</td>
+                    <td>{{ obj.priority }}</td>
+                    <td>{{ obj.due_date }}</td>
+                    <td>{{ obj.category }}</td>
+                    <td>{% deltadate obj.due_date %} days</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>there are any task</p>
+    {% endif %}
+{% endblock %}

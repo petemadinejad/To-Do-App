@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+{% load todo_tags %}
+{% block content %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        background-color: aliceblue;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+</style>
+<h1>To Do Application</h1>
+
+<p>Welcome to <em>To Do Application</em></p>
+<h2>
+    Detail Of Task {{ object }}
+</h2>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th>Category</th>
+        <th>time left</th>
+    </tr>
+    <tr>
+        <td>{{ object.title|sencase }}</td>
+        <td>{{ object.priority }}</td>
+        <td>{{ object.due_date }}</td>
+        <td>{{ object.category }}</td>
+        <td>{% deltadate object.due_date %} days</td>
+    </tr>
+</table>
+
+{% endblock %}
